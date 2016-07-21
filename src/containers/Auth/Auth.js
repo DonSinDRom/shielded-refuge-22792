@@ -1,16 +1,16 @@
 import React, { Component, PropTypes } from 'react';
-import styles from './App.scss';
+import styles from './Auth.scss';
 
-export default class App extends Component {
+export default class Auth extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired
   };
 
   render() {
     return (
-      <main className={styles.app}>
+      <section className={styles.auth}>
         {this.props.children}
-      </main>
+      </section>
     );
   }
 }

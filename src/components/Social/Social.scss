@@ -1,0 +1,32 @@
+.social {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+.social__label {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  width: 100%;
+  max-width: 20%;
+  user-select: none;
+}
+.social__checkbox[type="checkbox"] {
+}
+.social__checkbox_name {
+  text-transform: capitalize;
+}
+.social__input {
+  padding: 1.6rem;
+  width: 100%;
+  max-width: 80%;
+  margin: .5rem 0;
+  border: none;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity .4s ease-in;
+}
+.social__input____enabled {
+  opacity: 1;
+}

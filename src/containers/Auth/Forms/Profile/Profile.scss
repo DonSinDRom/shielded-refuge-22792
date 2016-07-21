@@ -1,0 +1,69 @@
+.profile {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+.profile__card {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row nowrap;
+  background-color: #fff;
+  margin: 32px 0;
+  padding: 24px;
+}
+.profile__header {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+}
+.profile__headers {
+}
+.profile__name {
+  margin: 0;
+  font-size: 20px;
+}
+.profile__email {
+  margin: 0;
+  font-size: 14px;
+}
+.profile__address {
+  font-size: 15px;
+}
+.profile__country {
+}
+.profile__addressDivider {
+
+}
+.profile__city {
+}
+.profile__socialList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.profile__socialItem {
+
+}
+.profile__socialLink {
+
+}
+.profile__socialText {
+
+}
+.profile__avatar {
+  margin: 0 0 0 24px;
+}
+.profile__avatarImage {
+  height: 195px;
+  width: 200px;
+}
+.profile__button {
+  background-color: #ff9800;
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  margin: .5rem;
+  border: none;
+  border-radius: 2px;
+  padding: 1rem 2rem;
+  margin: 0;
+}

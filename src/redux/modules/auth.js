@@ -1,103 +1,100 @@
-const LOAD = 'redux-example/auth/LOAD';
-const LOAD_SUCCESS = 'redux-example/auth/LOAD_SUCCESS';
-const LOAD_FAIL = 'redux-example/auth/LOAD_FAIL';
-const LOGIN = 'redux-example/auth/LOGIN';
-const LOGIN_SUCCESS = 'redux-example/auth/LOGIN_SUCCESS';
-const LOGIN_FAIL = 'redux-example/auth/LOGIN_FAIL';
-const LOGOUT = 'redux-example/auth/LOGOUT';
-const LOGOUT_SUCCESS = 'redux-example/auth/LOGOUT_SUCCESS';
-const LOGOUT_FAIL = 'redux-example/auth/LOGOUT_FAIL';
+const RESET = 'action:auth/RESET';
+const SET_INFO = 'action:auth/SET_INFO';
+const SET_ADDRESS = 'action:auth/SET_ADDRESS';
+const SET_SOCIAL = 'action:auth/SET_SOCIAL';
+const SET_AVATAR = 'action:auth/SET_AVATAR';
 
 const initialState = {
-  loaded: false
+  steps: [false, false, false, false],
+  name: '',
+  email: '',
+  country: '',
+  city: '',
+  social: {
+    fb: '',
+    vk: '',
+    twitter: '',
+    ok: ''
+  },
+  avatar: ''
 };
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case LOAD:
+    case RESET:
       return {
-        ...state,
-        loading: true
+        steps: [false, false, false, false],
+        name: '',
+        email: '',
+        country: '',
+        city: '',
+        social: {
+          facebook: '',
+          vk: '',
+          twitter: '',
+          ok: ''
+        },
+        avatar: ''
       };
-    case LOAD_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        loaded: true,
-        user: action.result
-      };
-    case LOAD_FAIL:
-      return {
-        ...state,
-        loading: false,
-        loaded: false,
-        error: action.error
-      };
-    case LOGIN:
-      return {
-        ...state,
-        loggingIn: true
-      };
-    case LOGIN_SUCCESS:
-      return {
-        ...state,
-        loggingIn: false,
-        user: action.result
-      };
-    case LOGIN_FAIL:
-      return {
-        ...state,
-        loggingIn: false,
-        user: null,
-        loginError: action.error
-      };
-    case LOGOUT:
-      return {
-        ...state,
-        loggingOut: true
-      };
-    case LOGOUT_SUCCESS:
-      return {
-        ...state,
-        loggingOut: false,
-        user: null
-      };
-    case LOGOUT_FAIL:
-      return {
-        ...state,
-        loggingOut: false,
-        logoutError: action.error
-      };
+    case SET_INFO:
+      return Object.assign({}, state, {
+        steps: action.name && action.name.length > 0 && action.email && action.email.length > 0 ? state.steps.map((step, id) => id === 0 ? true : step) : state.steps,
+        name: action.name,
+        email: action.email
+      });
+    case SET_ADDRESS:
+      return Object.assign({}, state, {
+        steps: action.country && action.country.length > 0 ? state.steps.map((step, id) => id === 1 ? true : step) : state.steps,
+        country: action.country,
+        city: action.city
+      });
+    case SET_SOCIAL:
+      return Object.assign({}, state, {
+        steps: state.steps.map((step, id) => id === 2 ? true : step),
+        social: Object.assign({}, state.social, action.social)
+      });
+    case SET_AVATAR:
+      return Object.assign({}, state, {
+        steps: action.avatar && action.avatar.length > 0 ? state.steps.map((step, id) => id === 3 ? true : step) : state.steps,
+        avatar: action.avatar
+      });
     default:
       return state;
   }
 }
 
-export function isLoaded(globalState) {
-  return globalState.auth && globalState.auth.loaded;
-}
-
-export function load() {
+export function reset() {
   return {
-    types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.get('/loadAuth')
+    type: RESET
   };
 }
 
-export function login(name) {
+export function setInfo(name, email) {
   return {
-    types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
-    promise: (client) => client.post('/login', {
-      data: {
-        name: name
-      }
-    })
+    type: SET_INFO,
+    name,
+    email
   };
 }
 
-export function logout() {
+export function setAddress(country, city) {
   return {
-    types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
-    promise: (client) => client.get('/logout')
+    type: SET_ADDRESS,
+    country,
+    city
+  };
+}
+
+export function setSocial(social) {
+  return {
+    type: SET_SOCIAL,
+    social
+  };
+}
+
+export function setAvatar(avatar) {
+  return {
+    type: SET_AVATAR,
+    avatar
   };
 }
