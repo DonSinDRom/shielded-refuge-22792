@@ -5,17 +5,4 @@
   height: 100vh;
   background-color: #f3f3f3;
   position: relative;
-  &:before {
-    content: '';
-    background-image: url(https://wtf.jpg.wtf/19/3f/1468937049-193f62f3418ffc41d8f909e3c205bf7c.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    opacity: .5;
-    z-index: 1;
-  }
 }
